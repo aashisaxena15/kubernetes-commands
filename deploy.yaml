@@ -1,0 +1,28 @@
+#this deployment was create through commands. 
+#use the following command
+#kubectl create deploy deploy/nginx-deploy --image=nginx --dry-run=client -o yaml > deploy.yaml 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deploy/nginx-deploy
+  name: deploy/nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy/nginx-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deploy/nginx-deploy
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
