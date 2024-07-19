@@ -1,0 +1,41 @@
+    1  sudo apt-get update && sudo apt-get install docker.io -y
+    2  sudo groupadd docker
+    3  sudo usermod -aG docker $USER
+    4  newgrp docker
+    5  docker ps
+    6  curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    7  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+    8  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    9  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+   10  sudo install minikube-linux-amd64 /usr/local/bin/minikube
+   11  minkube version
+   12  minikube version
+   13  minikube start
+   14  kubectl get all
+   15  kubectl run nginx-pod --image=nginx:latest
+   16  clear
+   17  kubectl run nginx-pod --image=nginx:latest
+   18  clear
+   19  kubectl get pods
+   20  vi pod.yaml
+   21  vi pod.yaml
+   22  kubectl apply -f pod.yaml
+   23  kubectl delete pod nginx
+   24  kubectl apply -f pod.yaml
+   25  kubectl delete pod nginx-pod
+   26  kubectl apply -f nginx-pod.yaml
+   27  kubectl apply -f pod.yaml
+   28  kubectl get pods
+   29  kubectl describe pod
+   30  kubectl exec -it nginx-pod -- sh
+   31  kubectl run nginx --image=nginx --dry-run=client
+   32  kubectl run nginx --image=nginx --dry-run=client -o yaml
+   33  kubectl run nginx --image=nginx --dry-run=client -o yaml > pod-new.yaml
+   34  kubectl get pods
+   35  kubectl describe pod nginx-pod
+   36  kubectl get pods nginx-pod --show-labels
+   37  kubectl get pods -o wide
+   38  history
+
+~                                                                                                                                                                                                           
+~                              
