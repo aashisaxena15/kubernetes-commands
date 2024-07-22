@@ -1,0 +1,31 @@
+    1  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    2  curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    3  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+    4  sudo apt-get update && sudo apt-get install docker.io -y
+    5  sudo groupadd docker
+    6  sudo usermod -aG docker $USER
+    7  newgrp docker
+    8  history
+    9  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+   10  kubectl version
+   11  # For AMD64 / x86_64
+   12  [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+   13  # For ARM64
+   14  [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-arm64
+   15  chmod +x ./kind
+   16  sudo mv ./kind /usr/local/bin/kind
+   17  kind version
+   18  kind create cluster --image kindest/node:v1.29.4@sha256:3abb816a5b1061fb15c6e9e60856ec40d56b7b52bcea5f5f1350bc6e2320b6f8 --name cka-cluster
+   19  kubectl get nodes
+   20  vi config.yaml
+   21  kind create cluster --image kindest/node:v1.29.4@sha256:3abb816a5b1061fb15c6e9e60856ec40d56b7b52bcea5f5f1350bc6e2320b6f8 --name cka-cluster --config config.yaml
+   22  kind create cluster --image kindest/node:v1.29.4@sha256:3abb816a5b1061fb15c6e9e60856ec40d56b7b52bcea5f5f1350bc6e2320b6f8 --name cka-cluster-kind --config config.yaml
+   23  kubectl cluster-info --context kind-cka-cluster-kind
+   24  kubectl fet nodes
+   25  kubectl get nodes
+   26  kubectl config get-contexts
+   27  kubectl config use-context kind-cka-cluster
+   28  kubectl get nodes
+   29  kubectl config use-context kind-cka-cluster-kind 
+   30  kubectl get nodes
+   31  history
