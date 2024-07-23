@@ -1,0 +1,43 @@
+
+df -h
+    2  sudo apt-get update && sudo apt-get install docker.io -y
+    3  sudo groupadd docker
+    4  sudo usermod -aG docker $USER
+    5  newgrp docker
+    6  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    7  curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    8  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+    9  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+   10  # For AMD64 / x86_64
+   11  [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+   12  # For ARM64
+   13  [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-arm64
+   14  chmod +x ./kind
+   15  sudo mv ./kind /usr/local/bin/kind
+   16  vi config.yaml
+   17  kind create cluster --config config.yaml --name cka-cluster3
+   18  kubectl get nodes
+   19  vi deployments.yaml
+   20  kubectl apply -f deployments.yaml
+   21  vi nodeport.yaml
+   22  kubectl apply -f nodeport.yaml
+   23  kubectl get all
+   24  kubectl get svc
+   25  kubectl describe po
+   26  kubectl describe svc nodeport-svc
+   27  curl localhost:30001
+   28  kubectl get pods
+   29  kubectl describe pod nginx-deploy-85645c9654-6z4vq
+   30  vi .bash_profile
+   31  source .bash_profile 
+   32  k
+   33  k get po
+   34  vi clusterip.yaml
+   35  k apply -f clusterip.yaml 
+   36  k get svc
+   37  k get po
+   38  k get po -o wide
+   39  k delete pod nginx-deploy-85645c9654-6z4vq
+   40  k get po
+   41  k get po -o wide
+   42  history
